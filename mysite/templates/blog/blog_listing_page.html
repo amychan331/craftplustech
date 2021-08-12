@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load wagtailimages_tags %}
+
+{% block content %}
+<main id="blogs" class="main-column">
+  {% for post in posts %}
+  <article>
+    {% if post.blog_image %}
+      {% image post.blog_image fill-1400x200 as blog_img %}
+      <a href="{{ post.url }}">
+        <img src="{{ blog_img.url }}" alt="{{ blog_img.let }}" style='width: 100%;height: auto;'>
+      </a>
+    {% endif %}
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <h4>- {{ post.published_date }} -</h4>
+    <hr>
+    <br />
+  </article>
+  {% endfor %}
+  </main>
+{% endblock content %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+<main class="left-column">
+  <h1>{{ self.title }}</h1>
+  {{ page.body|richtext }}
+</main>
+
+<aside id="contact">
+  <form id="form-contact" method="POST" action="{% pageurl page %}">
+      <h2>Message Me!</h2>
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <div class="msg msg-error" role="alert">
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if form.bot_error %}
+        <div class="msg msg-error" role="alert">
+          {{ form.bot_error }}
+        </div>
+      {% endif %}
+      <ul>
+        {{ form.as_ul }}
+      </ul>
+      <input type="text" name="name_not" style="display:none !important" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="ts" value="{% now 'U' %}" readonly="readonly">
+      <input type="submit" name="submit" aria-labelledby="submit_error" value='Contact Me!'>
+  </form>
+</aside>
+
+{% endblock content %}

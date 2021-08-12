@@ -1,0 +1,104 @@
+{% load static wagtailuserbar wagtailimages_tags %}
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            {% block title %}
+                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% with self.get_site.site_name as site_name %}
+                    {% if site_name %}- {{ site_name }}{% endif %}
+                {% endwith %}
+            {% endblock %}
+        </title>
+        <meta name="author" content="{{ settings.site_settings.MetadataSettings.author }}">
+        <meta name="description" content="{{ settings.site_settings.MetadataSettings.description }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# 3rd Party stylesheets #}
+        <link rel="stylesheet" href="
+        https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        {% if request.current_app and request.current_app == 'portfolio' %}
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.css">
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/accessible-slick-theme.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-lightbox/0.2.12/slick-lightbox.css">
+        {% endif %}
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
+        {% if request.current_app and request.current_app == 'portfolio' %}
+        <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+        {% endif %}
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        {% wagtailuserbar %}
+
+        <a href="main" id="skip-main">Skip to main content</a>
+
+        <header>
+            <div id="logo">
+                <h1><a href="/">Craft + Tech</a></h1>
+            </div>
+            <nav id='primary-menu' role="navigation" aria-label="Primary Menu">
+                <a href="#" id="navicon" aria-label="Expand menu bar"><i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i></a>
+                <div id="main-menu">
+                    <div class="parallelogram"><a href="/" aria-label="About"><span>About</span></a></div>
+                    <div class="parallelogram"><a href="/blog/" aria-label="Blog"><span>Blog</span></a></div>
+                    <div class="parallelogram"><a href="/portfolio/" aria-label="Portfolio"><span>Portfolio</span></a></div>
+                </div>
+            </nav>
+        </header>
+
+        <div id="container">
+            {% block content %}{% endblock %}
+        </div>
+
+        {# 3rd Prty javascript #}
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+        {% if request.current_app and request.current_app == 'portfolio' %}
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/@accessible360/accessible-slick@1.0.1/slick/slick.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-lightbox/0.2.12/slick-lightbox.min.js"></script>
+        {% endif %}
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+
+        <footer role='contentinfo'>
+            <div id="social-media" role="complementary">
+                {% if settings.site_settings.SocialMediaSettings.twitter %}
+                    <a href="{{ settings.site_settings.SocialMediaSettings.twitter }}" title="Amy's Twitter Page">
+                        <i class="fa fa-twitter-square fa-2x" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if settings.site_settings.SocialMediaSettings.linkedin %}
+                    <a href="{{ settings.site_settings.SocialMediaSettings.linkedin }}" title="Amy's LinkedIn Profile">
+                        <i class="fa fa-linkedin-square fa-2x" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+                {% if settings.site_settings.SocialMediaSettings.github %}
+                    <a href="{{ settings.site_settings.SocialMediaSettings.github }}" title="Amy's Github Repos">
+                        <i class="fa fa-github-square fa-2x" aria-hidden="true"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <p class='copyright'>
+                &copy; {% now "Y" %} {% if settings.site_settings.FooterSettings.footer_text %}{{ settings.site_settings.FooterSettings.footer_text }}{% endif %}
+                <br>
+                {% if settings.site_settings.FooterSettings.footer_image %}
+                    {% image settings.site_settings.FooterSettings.footer_image original %}
+                {% endif %}
+            </p>
+        </footer>
+    </body>
+</html>

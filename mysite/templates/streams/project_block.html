@@ -1,0 +1,24 @@
+{% load wagtailimages_tags wagtailcore_tags %}
+
+<article id="{{ self.uid }}">
+  <div id="slide-{{ self.uid }}" class="site-slider-wrapper">
+    <div class="site-slider">
+      {% for slide in self.slides %}
+      {% image slide.image original as img %}
+      <a href="{{ img.url }}" role="region">
+        <img src="{{ img.url }}" alt="{{ img.alt }}">
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  <aside>
+    <h3>{{ self.title }} </h3>
+    <p>{{ self.content }}</p>
+    <p>
+      <span class="link italic">View code for '{{ self.title }}' at Github &gt;&gt; </span>
+      <a class="icon" href="{{ self.url }} " aria-label="Github repo of project">
+        <i class="fa fa-github-alt" aria-hidden="true"></i>
+      </a>
+    </p>
+  </aside>
+</article>

@@ -1,0 +1,72 @@
+/* SLIDER
+---------------------------------*/
+main#portfolio {
+    margin: auto;
+    width: 90%;
+}
+
+main#portfolio article {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 275px;
+    margin: 20px 0;
+}
+
+article div.site-slider-wrapper {
+    -webkit-flex-shrink: 0;
+    -moz-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    padding: 0 40px;
+    margin: auto;
+    margin-right: 20px;
+    width: 500px;
+}
+
+article div.site-slider .slick-slide {
+    height: 275px;
+    margin: auto;
+    overflow: hidden;
+}
+
+article div.site-slider .slick-slide img {
+    height: auto;
+    width: 100%;
+}
+
+article aside {
+    -webkit-flex-basis: 100%;
+    -moz-flex-basis: 100%;
+    -ms-flex-preferred-size: 100%;
+    flex-basis: 100%;
+}
+
+article aside h2 {
+    margin: 0;
+}
+
+/* MEDIA QUERIES
+---------------------------------*/
+/* Smartphones and tablets (portrait and landscape) */
+@media only screen and (max-width: 850px) {
+
+}
+
+/* Tablets (portrait and landscape) for Portfolio */
+@media only screen and (min-width: 641px) and (max-width: 1200px) {
+
+}
+
+/* Smartphone (landscape) for Portfolio */
+@media only screen and (max-width: 641px) {
+
+
+}
+
+/* Smartphone (potrait) for Portfolio */
+@media only screen and (max-width: 481px) {
+
+}

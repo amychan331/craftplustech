@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+<main class="left-column">
+  <h1>{{ self.title }}</h1>
+  {{ page.body|richtext }}
+</main>
+
+<aside id="contact">
+  <p>
+      {{ self.thank_you_text|richtext }}
+  </p>
+</aside>
+
+{% endblock content %}

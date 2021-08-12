@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags %}
+
+{% block content %}
+<main id="portfolio">
+  {% for block in self.content %}
+    {% include_block block %}
+  {% endfor %}
+  </main>
+{% endblock content %}
